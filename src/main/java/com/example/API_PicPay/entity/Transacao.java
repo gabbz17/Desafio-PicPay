@@ -7,33 +7,30 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+@EqualsAndHashCode(of = "id")
 @ToString
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "transferencia")
+public class Transacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    private String nomeCompleto;
-    @NotBlank
-    @Size(min = 11, max = 14)
-    @Column(unique = true)
-    private String cpfOuCnpj;
-    @NotBlank
-    @Column(unique = true)
-    private String email;
+    private String remetente;
     @NotBlank
     @Size(min = 8, max = 10)
-    private String senha;
+    private String senhaRemetente;
+    @NotBlank
+    private String destinatario;
     @NotNull
-    private Role role;
-    private BigDecimal saldo;
+    private BigDecimal valor;
+    LocalDateTime horaTransacao = LocalDateTime.now();
+
 }
