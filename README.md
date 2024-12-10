@@ -61,5 +61,8 @@
 * Ambiente para versionamento de código -> Git e GitHub
 * Ambiente para Contêinerização -> Docker
 
+# URL para documentação da API
+**http://localhost:8080/picPay-docs.html**
+
 
 
