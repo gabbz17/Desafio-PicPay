@@ -1,11 +1,22 @@
-package com.example.API_PicPay.person;
+package com.example.API_PicPay.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.*;
 
-@MappedSuperclass
-public class Person {
+import java.math.BigDecimal;
+
+@ToString
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@Entity
+@Table(name = "cliente")
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +33,7 @@ public class Person {
     @NotBlank
     @Size(min = 8, max = 10)
     private String senha;
+    @NotNull
+    private Role role;
+    private BigDecimal saldo;
 }
