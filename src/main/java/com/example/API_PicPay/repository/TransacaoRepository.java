@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TransacaoRepository extends JpaRepository<Transacao, Long> {
-    Optional<List<Transacao>> findByRemetente(String email);
-    Optional<List<Transacao>> findByDestinatario(String email);
+    List<Transacao> findByRemetente(String email);
+    List<Transacao> findByDestinatario(String email);
 }

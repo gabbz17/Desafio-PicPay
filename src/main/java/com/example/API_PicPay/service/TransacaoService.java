@@ -3,6 +3,7 @@ package com.example.API_PicPay.service;
 import com.example.API_PicPay.entity.Cliente;
 import com.example.API_PicPay.entity.Role;
 import com.example.API_PicPay.entity.Transacao;
+import com.example.API_PicPay.exception.ListNotFoundException;
 import com.example.API_PicPay.exception.NameNotFoundException;
 import com.example.API_PicPay.repository.TransacaoRepository;
 import org.springframework.stereotype.Service;
@@ -47,12 +48,20 @@ public class TransacaoService {
     }
 
     public List<Transacao> findByRemetente(String email){
-        return repository.findByRemetente(email).orElseThrow(() ->
-                new NameNotFoundException(String.format("Transações com o Remetente(%s) não encontradas!", email)));
+        List<Transacao> transacaos = repository.findByRemetente(email);
+
+        if (transacaos.isEmpty()){
+            throw new ListNotFoundException(String.format("Transações com o email de remetente (%s), não encontrada!", email));
+        }
+        return transacaos;
     }
 
     public List<Transacao> findByDestinatario(String email){
-        return repository.findByDestinatario(email).orElseThrow(() ->
-                new NameNotFoundException(String.format("Transações com o Destinatario(%s) não encontradas!", email)));
+        List<Transacao> transacaos = repository.findByDestinatario(email);
+
+        if (transacaos.isEmpty()){
+            throw new ListNotFoundException(String.format("Transações com o email de destinatário (%s), não encontrada!", email));
+        }
+        return transacaos;
     }
 }

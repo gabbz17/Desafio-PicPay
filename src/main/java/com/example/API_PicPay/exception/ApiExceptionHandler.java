@@ -41,4 +41,11 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(st, HttpStatus.NOT_FOUND,ex.getMessage()));
     }
+
+    @ExceptionHandler(ListNotFoundException.class)
+    public ResponseEntity<ErrorMessage> listNotFoundException(ListNotFoundException ex, HttpServletRequest st) {
+        log.error("Api error - ", ex);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(st, HttpStatus.NOT_FOUND,ex.getMessage()));
+    }
 }
